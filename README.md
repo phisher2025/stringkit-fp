@@ -1,12 +1,18 @@
 # 🧵 StringKit-FP: The Complete String Toolkit
 
 [![FPC](https://img.shields.io/badge/Free%20Pascal-3.2.2-blue.svg)](https://www.freepascal.org/)
-[![Lazarus](https://img.shields.io/badge/Lazarus-3.6+-blue.svg)](https://www.lazarus-ide.org/)
+[![Lazarus](https://img.shields.io/badge/Lazarus-4.0+-blue.svg)](https://www.lazarus-ide.org/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.md)
 [![Documentation](https://img.shields.io/badge/Docs-Available-brightgreen.svg)](docs/)
 [![Tests](https://img.shields.io/badge/Tests-Passing-brightgreen.svg)](tests/)
 [![Status](https://img.shields.io/badge/Status-Ready%20to%20Weave-brightgreen.svg)]()
 [![Version](https://img.shields.io/badge/Version-1.0.0-blueviolet.svg)]()
+
+
+<p align="center">
+  <img src="assets/logo-v1-320.png" alt="StringKit-FP Logo" width="320"/>
+</p>
+
 
 ## 🧵 Why Choose StringKit-FP?
 
