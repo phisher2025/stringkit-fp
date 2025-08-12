@@ -10,7 +10,7 @@
 
 ## 🧵 Why Choose StringKit-FP?
 
-StringKit-FP is a comprehensive string manipulation library for Free Pascal, designed to handle everything from basic text processing to advanced pattern analysis. Whether you're building web applications, data processing tools, or text analysis systems, StringKit provides the robust functionality you need.
+Professional string toolkit featuring advanced algorithms: Levenshtein/Jaro similarity, Soundex/Metaphone phonetics, readability scoring, regex patterns, HTML/URL encoding, and comprehensive validation. Static API, no instantiation required.
 
 **🎯 Key Advantages:**
 
