@@ -105,6 +105,8 @@ type
     // More Encoding/Decoding Functions
     procedure Test71_HexEncode;
     procedure Test72_HexDecode;
+    procedure Test73_Base64Encode;
+    procedure Test74_Base64Decode;
   end;
 
 implementation
@@ -1253,6 +1255,50 @@ begin
     
   AssertEquals('Invalid hex characters should be ignored',
     'ABC', TStringKit.HexDecode('414243XX'));
+end;
+
+procedure TStringTests.Test73_Base64Encode;
+begin
+  // Basic examples
+  AssertEquals('Base64 encode of Hello', 'SGVsbG8=', TStringKit.Encode64('Hello'));
+  AssertEquals('Empty string encodes to empty', '', TStringKit.Encode64(''));
+
+  // RFC 4648 test vectors
+  AssertEquals('RFC vector 1', 'TWFu', TStringKit.Encode64('Man'));
+  AssertEquals('RFC vector 2', 'TWE=', TStringKit.Encode64('Ma'));
+  AssertEquals('RFC vector 3', 'TQ==', TStringKit.Encode64('M'));
+
+  // Common padding scenarios
+  AssertEquals('foo', 'Zm9v', TStringKit.Encode64('foo'));
+  AssertEquals('fo', 'Zm8=', TStringKit.Encode64('fo'));
+  AssertEquals('f', 'Zg==', TStringKit.Encode64('f'));
+end;
+
+procedure TStringTests.Test74_Base64Decode;
+var
+  WithWS: string;
+begin
+  // Basic examples
+  AssertEquals('Base64 decode of SGVsbG8=', 'Hello', TStringKit.Decode64('SGVsbG8='));
+  AssertEquals('Empty string decodes to empty', '', TStringKit.Decode64(''));
+
+  // RFC 4648 test vectors
+  AssertEquals('RFC vector 1', 'Man', TStringKit.Decode64('TWFu'));
+  AssertEquals('RFC vector 2', 'Ma', TStringKit.Decode64('TWE='));
+  AssertEquals('RFC vector 3', 'M', TStringKit.Decode64('TQ=='));
+
+  // Ignore whitespace in decoder
+  WithWS := 'Zm' + #13#10 + '9v' + #9 + '' + #32 + '';
+  AssertEquals('Decoder should ignore whitespace', 'foo', TStringKit.Decode64(WithWS));
+
+  // Padding and non-padded cases
+  AssertEquals('foo', 'foo', TStringKit.Decode64('Zm9v'));
+  AssertEquals('fo', 'fo', TStringKit.Decode64('Zm8='));
+  AssertEquals('f', 'f', TStringKit.Decode64('Zg=='));
+
+  // Invalid input should return empty string per implementation
+  AssertEquals('Invalid characters should yield empty', '', TStringKit.Decode64('@@@'));
+  AssertEquals('Bad padding should yield empty', '', TStringKit.Decode64('SGVsbG8==='));
 end;
 
 initialization

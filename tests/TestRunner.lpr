@@ -5,8 +5,8 @@ program TestRunner;
 uses
   Classes
   , consoletestrunner
-  , StringKit.Test;
-
+  , StringKit.Test
+  , StringKitHelper.Test;
 type
 
   { TMyTestRunner }

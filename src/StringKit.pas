@@ -1832,6 +1832,44 @@ type
     }
     class function URLDecode(const Text: string): string; static;
     
+    {
+      @description Encodes binary/text data into Base64 representation using the standard
+                   Base64 alphabet (RFC 4648) with '=' padding.
+      
+      @usage Use to safely transmit/serialize arbitrary bytes as ASCII text.
+      
+      @param Text The input string to encode. Each character's byte value is used.
+      
+      @returns Base64-encoded string. Empty string encodes to empty string.
+      
+      @warning Operates on the raw bytes in the string. For Unicode text, ensure the
+               encoding is as expected (e.g., UTF-8) before calling.
+      
+      @example
+        Result := Encode64('Hello'); // Returns: 'SGVsbG8='
+        Result := Encode64('');      // Returns: ''
+    }
+    class function Encode64(const Text: string): string; static;
+    
+    {
+      @description Decodes a Base64-encoded string (RFC 4648, standard alphabet) back to
+                   its original byte sequence represented as a Pascal string.
+      
+      @usage Use to decode data previously encoded with Encode64 or other compatible Base64 encoders.
+      
+      @param Base64Text The Base64 string (may contain '=' padding). Whitespace is ignored.
+      
+      @returns Decoded string. Returns empty string on invalid input.
+      
+      @warning Invalid characters or incorrect padding result in an empty string. Operates on
+               bytes; convert to text with the appropriate encoding if necessary.
+      
+      @example
+        Result := Decode64('SGVsbG8='); // Returns: 'Hello'
+        Result := Decode64('');         // Returns: ''
+    }
+    class function Decode64(const Base64Text: string): string; static;
+    
     { -------------------- Number Conversions -------------------- }
     
     {
@@ -1994,7 +2032,7 @@ type
         Result := HexDecode('313233');   // Returns: '123'
         Result := HexDecode('0AFF');     // Returns: #$0A#$FF (LF character followed by FF character)
         Result := HexDecode('48656c6c6f'); // Returns: 'Hello' (case-insensitive)
-        Result := HexDecode('48 65 6C'); // Returns: 'Hl' (skips space, processes '48', skips ' 6', processes '6C') - Let's recheck. It checks pairs `^[0-9A-Fa-f]{2}$`. '48' ok. ' 6' fails. '65' ok. ' 6' fails. '6C' ok. Result should be 'HeL'. Let's trace: I=1, Pair='48', Add Chr(72)='H'. I=3. Pair='65', Add Chr(101)='e'. I=5. Pair='6C', Add Chr(108)='l'. I=7. Pair='6C', Add Chr(108)='l'. I=9. Pair='6F', Add Chr(111)='o'. Result 'Hello'. The example '48 65 6C' needs re-evaluation. I=1, Pair='48', Add 'H'. I=3. Pair=' 6', Fails regex. I=4. Pair='65', Add 'e'. I=6. Pair=' 6', Fails regex. I=7. Pair='6C', Add 'L'. I=9. End. Result: 'HeL'. Example corrected.
+        Result := HexDecode('48 65 6C'); // Returns: 'HeL' (skips space, processes '48', skips ' 6', processes '6C') - Let's recheck. It checks pairs `^[0-9A-Fa-f]{2}$`. '48' ok. ' 6' fails. '65' ok. ' 6' fails. '6C' ok. Result should be 'HeL'. Let's trace: I=1, Pair='48', Add Chr(72)='H'. I=3. Pair='65', Add Chr(101)='e'. I=5. Pair='6C', Add Chr(108)='l'. I=7. Pair='6F', Add Chr(111)='o'. Result 'Hello'. The example '48 65 6C' needs re-evaluation. I=1, Pair='48', Add 'H'. I=3. Pair=' 6', Fails regex. I=4. Pair='65', Add 'e'. I=6. Pair=' 6', Fails regex. I=7. Pair='6C', Add 'L'. I=9. End. Result: 'HeL'. Example corrected.
         Result := HexDecode('48656C6C6'); // Returns: '' (odd length)
         Result := HexDecode('');         // Returns: ''
     }
@@ -2143,7 +2181,7 @@ begin
           while (Length(S) > 0) and IsWhiteSpace(S[1]) do
             Delete(S, 1, 1);
           if Length(S) > 0 then
-            Words[I] := UpperCase(S[1]) + Copy(S, 2, Length(S));
+            Words[I] := UpperCase(S[1]) + LowerCase(Copy(S, 2, Length(S)));
         end;
       
       Result := StringReplace(Words.DelimitedText, Words.Delimiter, ' ', [rfReplaceAll]);
@@ -2852,6 +2890,166 @@ begin
   end;
 end;
 
+class function TStringKit.Encode64(const Text: string): string;
+const
+  B64Table: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+var
+  I, O: Integer;
+  A, B, C: Byte;
+  OutStr: string;
+  Len: Integer;
+begin
+  Len := Length(Text);
+  if Len = 0 then
+  begin
+    Result := '';
+    Exit;
+  end;
+
+  OutStr := '';
+  SetLength(OutStr, ((Len + 2) div 3) * 4);
+
+  I := 1;
+  O := 1;
+  while I <= Len do
+  begin
+    A := Ord(Text[I]);
+    if I + 1 <= Len then B := Ord(Text[I + 1]) else B := 0;
+    if I + 2 <= Len then C := Ord(Text[I + 2]) else C := 0;
+
+    // 24-bit group -> 4 chars
+    OutStr[O]     := B64Table[((A shr 2) and $3F) + 1];
+    OutStr[O + 1] := B64Table[(((A and $03) shl 4) or ((B shr 4) and $0F)) + 1];
+    if I + 1 <= Len then
+      OutStr[O + 2] := B64Table[(((B and $0F) shl 2) or ((C shr 6) and $03)) + 1]
+    else
+      OutStr[O + 2] := '=';
+    if I + 2 <= Len then
+      OutStr[O + 3] := B64Table[((C and $3F)) + 1]
+    else
+      OutStr[O + 3] := '=';
+
+    Inc(I, 3);
+    Inc(O, 4);
+  end;
+  Result := OutStr;
+end;
+
+class function TStringKit.Decode64(const Base64Text: string): string;
+var
+  Rev: array[0..127] of ShortInt;
+  I, J, L: Integer;
+  C: Char;
+  Acc: Cardinal;
+  Bits: Integer;
+  OutBytes: array of Byte;
+  OutLen: Integer;
+  S: string;
+  PadPos, PadCount, K: Integer;
+begin
+  // Strip whitespace first to simplify validation
+  S := '';
+  for I := 1 to Length(Base64Text) do
+    if not (Base64Text[I] in [#9, #10, #13, ' ']) then
+      S := S + Base64Text[I];
+
+  if S = '' then
+  begin
+    Result := '';
+    Exit;
+  end;
+
+  // Length must be a multiple of 4
+  if (Length(S) mod 4) <> 0 then
+  begin
+    Result := '';
+    Exit;
+  end;
+
+  // Validate padding: only allowed at the end, and must be exactly 1 or 2 '=' if present
+  PadPos := Pos('=', S);
+  if PadPos > 0 then
+  begin
+    // Ensure all remaining chars are '='
+    for K := PadPos to Length(S) do
+      if S[K] <> '=' then
+      begin
+        Result := '';
+        Exit;
+      end;
+    PadCount := Length(S) - PadPos + 1;
+    if (PadCount <> 1) and (PadCount <> 2) then
+    begin
+      Result := '';
+      Exit;
+    end;
+  end;
+
+  // Initialize reverse table (-1 for invalid)
+  for I := Low(Rev) to High(Rev) do Rev[I] := -1;
+  for I := 0 to 25 do Rev[Ord('A') + I] := I;
+  for I := 0 to 25 do Rev[Ord('a') + I] := 26 + I;
+  for I := 0 to 9 do Rev[Ord('0') + I] := 52 + I;
+  Rev[Ord('+')] := 62;
+  Rev[Ord('/')] := 63;
+
+  SetLength(OutBytes, (Length(S) * 3) div 4 + 3);
+  OutLen := 0;
+  Acc := 0;
+  Bits := 0;
+
+  L := Length(S);
+  I := 1;
+  while I <= L do
+  begin
+    C := S[I];
+    Inc(I);
+    if (C <= #127) then
+    begin
+      if C = '=' then
+        Break;
+
+      J := Rev[Ord(C)];
+      if J >= 0 then
+      begin
+        Acc := (Acc shl 6) or Cardinal(J);
+        Inc(Bits, 6);
+        if Bits >= 8 then
+        begin
+          Dec(Bits, 8);
+          OutBytes[OutLen] := Byte((Acc shr Bits) and $FF);
+          Inc(OutLen);
+        end;
+        Continue;
+      end
+      else
+      begin
+        // Invalid character
+        Result := '';
+        Exit;
+      end;
+    end
+    else
+    begin
+      // Non-ASCII char is invalid in standard Base64
+      Result := '';
+      Exit;
+    end;
+  end;
+
+  // Any leftover bits must be zero (shouldn't happen in valid Base64)
+  if (Bits > 0) and ((Acc and ((1 shl Bits) - 1)) <> 0) then
+  begin
+    // Strictness: treat as invalid
+    Result := '';
+    Exit;
+  end;
+
+  SetLength(Result, OutLen);
+  for J := 0 to OutLen - 1 do
+    Result[J + 1] := Char(OutBytes[J]);
+end;
+
 class function TStringKit.FormatFloat(const Value: Double; Decimals: Integer = 2; DecimalSeparator: Char = '.'; ThousandSeparator: Char = ','): string;
 var
   I, IntegerPartLen: Integer;
@@ -2990,7 +3188,17 @@ begin
   
   // First letter is preserved
   Result := UpperText[1];
-  PrevCode := '0';  // Init previous code
+  // Set PrevCode to the Soundex code of the first letter to avoid duplicating
+  // the sound code for the second letter when it's the same as the first
+  case UpperText[1] of
+    'B', 'F', 'P', 'V': PrevCode := '1';
+    'C', 'G', 'J', 'K', 'Q', 'S', 'X', 'Z': PrevCode := '2';
+    'D', 'T': PrevCode := '3';
+    'L': PrevCode := '4';
+    'M', 'N': PrevCode := '5';
+    'R': PrevCode := '6';
+    else PrevCode := '0';  // A, E, I, O, U, H, W, Y and others
+  end;
   ResultLen := 1;   // Length of result so far (first letter already added)
   
   // Process remaining letters
@@ -3013,9 +3221,14 @@ begin
       else CurCode := '0';  // A, E, I, O, U, H, W, Y
     end;
     
-    // Skip vowels and 'H', 'W', 'Y'
+    // Skip vowels and separators. Only vowels and 'Y' reset PrevCode; 'H' and 'W'
+    // do NOT reset (per standard Soundex), so duplicates across H/W are collapsed.
     if CurCode = '0' then
+    begin
+      if Ch in ['A','E','I','O','U','Y'] then
+        PrevCode := '0';
       Continue;
+    end;
       
     // Skip repeated consonant codes
     if CurCode = PrevCode then
@@ -3099,8 +3312,17 @@ begin
             Result := Result + 'X'; // CH -> X
             Inc(I);  // Skip 'H'
           end
+          else if NextCh = 'K' then
+          begin
+            Result := Result + 'K'; // CK -> K (single K)
+            Inc(I); // Skip 'K'
+          end
           else if (NextCh = 'I') or (NextCh = 'E') or (NextCh = 'Y') then
-            Result := Result + 'S'  // Soft C
+          begin
+            // Soft C -> S; avoid emitting duplicate 'S'
+            if (Length(Result) = 0) or (Result[Length(Result)] <> 'S') then
+              Result := Result + 'S';
+          end
           else
             Result := Result + 'K'; // Hard C
         end;
@@ -3221,7 +3443,13 @@ begin
       'W':
         begin
           if I = 1 then
-            Result := Result + 'W'  // Initial W is preserved
+          begin
+            // Initial WR -> R (silent W)
+            if NextCh = 'R' then
+              Skip := True
+            else
+              Result := Result + 'W';
+          end
           else
             Skip := True;  // Non-initial W is often part of a vowel sound
         end;

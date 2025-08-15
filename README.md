@@ -6,7 +6,7 @@
 [![Documentation](https://img.shields.io/badge/Docs-Available-brightgreen.svg)](docs/)
 [![Tests](https://img.shields.io/badge/Tests-Passing-brightgreen.svg)](tests/)
 [![Status](https://img.shields.io/badge/Status-Ready%20to%20Weave-brightgreen.svg)]()
-[![Version](https://img.shields.io/badge/Version-1.0.0-blueviolet.svg)]()
+[![Version](https://img.shields.io/badge/Version-1.5.0-blueviolet.svg)]()
 
 
 <p align="center">
@@ -148,6 +148,33 @@ uses
   // String manipulation library
   StringKit;           // All string operations
 ```
+
+### 🧩 Instance-Style API via Type Helpers
+
+StringKit also provides a string type helper for more natural, instance-style calls.
+
+```pascal
+uses
+  StringKit, StringKitHelper; // Enable helper-backed instance methods on 'string'
+
+var
+  S: string;
+begin
+  // Instance-style calls (via TStringHelperEx)
+  S := '  hello world  '.Trim;                // 'hello world'
+  S := 'Hello World'.ToSnakeCase;             // 'hello_world'
+  if 'user@example.com'.IsValidEmail then ;   // True
+  S := 'Hello World!'.URLEncode;              // 'Hello+World%21'
+  S := 'foo'.Encode64;                        // 'Zm9v'
+
+  // Equivalent static calls still work
+  S := TStringKit.Trim('  hello world  ');
+end;
+```
+
+Notes:
+- Add `StringKitHelper` to your unit's `uses` clause to enable helper methods.
+- Most `TStringKit` string-first methods are available via the helper for convenience; methods that don't operate on a source string may remain as static calls.
 
 ## 🎨 Start Weaving: Quick Thread Patterns
 
@@ -301,6 +328,11 @@ begin
   // URL encoding for web parameters
   Encoded := TStringKit.URLEncode('Hello World!');     // Returns: 'Hello+World%21'
   Decoded := TStringKit.URLDecode('Hello+World%21');   // Returns: 'Hello World!'
+  
+  // Base64 encoding/decoding
+  Encoded := TStringKit.Encode64('foo');               // Returns: 'Zm9v'
+  Decoded := TStringKit.Decode64('Zm8=');              // Returns: 'fo'
+  Decoded := TStringKit.Decode64('Zg==');              // Returns: 'f'
   
   // Hexadecimal encoding
   Encoded := TStringKit.HexEncode('Hello');            // Returns: '48656C6C6F'

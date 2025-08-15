@@ -2,6 +2,37 @@
 
 ## 🧵String operations
 
+### Using helpers (instance-style)
+
+Enable instance-style string methods by adding `StringKitHelper` to your uses.
+
+```pascal
+uses
+  StringKit, StringKitHelper;
+
+var
+  S: string;
+begin
+  S := '  hello world  '.Trim;          // 'hello world'
+  S := 'Hello World'.ToSnakeCase;       // 'hello_world'
+  if 'user@example.com'.IsValidEmail then ; // True
+  S := 'foo'.Encode64;                  // 'Zm9v'
+  S := 'Hello World!'.URLEncode;        // 'Hello+World%21'
+  S := '  Mixed Case  '.Trim.ToUpper;   // Chaining: 'MIXED CASE'
+  if 'ABC123'.MatchesPattern('^[A-Z]{3}\d{3}$') then ; // True (regex via helper)
+  // Split and Join via helpers
+  // Note: Split returns TMatchStrings; JoinWith uses Self as the delimiter
+  S := ','.JoinWith('a,b,,c'.Split(',', 0, True)); // 'a,b,c'
+end;
+```
+
+Notes:
+- Most `TStringKit` string-first methods are available via the helper for convenience.
+- Chaining is supported because helpers return strings (e.g., `'text'.Trim.ToLower`).
+- Use static `TStringKit` calls for operations that don't act on a source string (e.g., number conversions), or when passing non-string types.
+
+### Using static methods (type-first)
+
 ```pascal
 // ---------- Basic String Manipulation ----------
 
@@ -134,6 +165,12 @@ Encoded := TStringKit.HTMLEncode('<div>');             // HTML encoding
 Decoded := TStringKit.HTMLDecode('&lt;div&gt;');       // HTML decoding
 Encoded := TStringKit.URLEncode('a b');                // URL encoding (a+b)
 Decoded := TStringKit.URLDecode('a+b');                // URL decoding
+
+// Base64 Encoding
+Encoded := TStringKit.Encode64('foo');                  // Base64 encode (Zm9v)
+Decoded := TStringKit.Decode64('Zm9v');                 // Base64 decode (foo)
+Decoded := TStringKit.Decode64('Zm8=');                 // Base64 decode with padding (fo)
+Decoded := TStringKit.Decode64('Zg==');                 // Base64 decode with padding (f)
 
 // Hex Encoding
 HexStr := TStringKit.HexEncode('abc');                   // Hex encoding (616263)
