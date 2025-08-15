@@ -5,7 +5,7 @@ unit StringKit;
 interface
 
 uses
-  Classes, SysUtils, RegExpr, StrUtils, Math, DateUtils;
+  Classes, SysUtils, RegExpr, StrUtils, Math, DateUtils, base64;
 
 type
   { TStringMatch
@@ -2891,163 +2891,36 @@ begin
 end;
 
 class function TStringKit.Encode64(const Text: string): string;
-const
-  B64Table: string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
-var
-  I, O: Integer;
-  A, B, C: Byte;
-  OutStr: string;
-  Len: Integer;
 begin
-  Len := Length(Text);
-  if Len = 0 then
-  begin
-    Result := '';
-    Exit;
-  end;
-
-  OutStr := '';
-  SetLength(OutStr, ((Len + 2) div 3) * 4);
-
-  I := 1;
-  O := 1;
-  while I <= Len do
-  begin
-    A := Ord(Text[I]);
-    if I + 1 <= Len then B := Ord(Text[I + 1]) else B := 0;
-    if I + 2 <= Len then C := Ord(Text[I + 2]) else C := 0;
-
-    // 24-bit group -> 4 chars
-    OutStr[O]     := B64Table[((A shr 2) and $3F) + 1];
-    OutStr[O + 1] := B64Table[(((A and $03) shl 4) or ((B shr 4) and $0F)) + 1];
-    if I + 1 <= Len then
-      OutStr[O + 2] := B64Table[(((B and $0F) shl 2) or ((C shr 6) and $03)) + 1]
-    else
-      OutStr[O + 2] := '=';
-    if I + 2 <= Len then
-      OutStr[O + 3] := B64Table[((C and $3F)) + 1]
-    else
-      OutStr[O + 3] := '=';
-
-    Inc(I, 3);
-    Inc(O, 4);
-  end;
-  Result := OutStr;
+  // Use FPC's RTL implementation for Base64 encoding
+  if Text = '' then
+    Exit('');
+  Result := EncodeStringBase64(Text);
 end;
 
 class function TStringKit.Decode64(const Base64Text: string): string;
 var
-  Rev: array[0..127] of ShortInt;
-  I, J, L: Integer;
-  C: Char;
-  Acc: Cardinal;
-  Bits: Integer;
-  OutBytes: array of Byte;
-  OutLen: Integer;
   S: string;
-  PadPos, PadCount, K: Integer;
+  I: Integer;
 begin
-  // Strip whitespace first to simplify validation
+  if Base64Text = '' then
+    Exit('');
+
+  // Remove MIME-style whitespace so strict decoder can be used
   S := '';
   for I := 1 to Length(Base64Text) do
     if not (Base64Text[I] in [#9, #10, #13, ' ']) then
       S := S + Base64Text[I];
 
   if S = '' then
-  begin
+    Exit('');
+
+  // Strict decoding enforces correct alphabet and padding
+  try
+    Result := DecodeStringBase64(S, True);
+  except
     Result := '';
-    Exit;
   end;
-
-  // Length must be a multiple of 4
-  if (Length(S) mod 4) <> 0 then
-  begin
-    Result := '';
-    Exit;
-  end;
-
-  // Validate padding: only allowed at the end, and must be exactly 1 or 2 '=' if present
-  PadPos := Pos('=', S);
-  if PadPos > 0 then
-  begin
-    // Ensure all remaining chars are '='
-    for K := PadPos to Length(S) do
-      if S[K] <> '=' then
-      begin
-        Result := '';
-        Exit;
-      end;
-    PadCount := Length(S) - PadPos + 1;
-    if (PadCount <> 1) and (PadCount <> 2) then
-    begin
-      Result := '';
-      Exit;
-    end;
-  end;
-
-  // Initialize reverse table (-1 for invalid)
-  for I := Low(Rev) to High(Rev) do Rev[I] := -1;
-  for I := 0 to 25 do Rev[Ord('A') + I] := I;
-  for I := 0 to 25 do Rev[Ord('a') + I] := 26 + I;
-  for I := 0 to 9 do Rev[Ord('0') + I] := 52 + I;
-  Rev[Ord('+')] := 62;
-  Rev[Ord('/')] := 63;
-
-  SetLength(OutBytes, (Length(S) * 3) div 4 + 3);
-  OutLen := 0;
-  Acc := 0;
-  Bits := 0;
-
-  L := Length(S);
-  I := 1;
-  while I <= L do
-  begin
-    C := S[I];
-    Inc(I);
-    if (C <= #127) then
-    begin
-      if C = '=' then
-        Break;
-
-      J := Rev[Ord(C)];
-      if J >= 0 then
-      begin
-        Acc := (Acc shl 6) or Cardinal(J);
-        Inc(Bits, 6);
-        if Bits >= 8 then
-        begin
-          Dec(Bits, 8);
-          OutBytes[OutLen] := Byte((Acc shr Bits) and $FF);
-          Inc(OutLen);
-        end;
-        Continue;
-      end
-      else
-      begin
-        // Invalid character
-        Result := '';
-        Exit;
-      end;
-    end
-    else
-    begin
-      // Non-ASCII char is invalid in standard Base64
-      Result := '';
-      Exit;
-    end;
-  end;
-
-  // Any leftover bits must be zero (shouldn't happen in valid Base64)
-  if (Bits > 0) and ((Acc and ((1 shl Bits) - 1)) <> 0) then
-  begin
-    // Strictness: treat as invalid
-    Result := '';
-    Exit;
-  end;
-
-  SetLength(Result, OutLen);
-  for J := 0 to OutLen - 1 do
-    Result[J + 1] := Char(OutBytes[J]);
 end;
 
 class function TStringKit.FormatFloat(const Value: Double; Decimals: Integer = 2; DecimalSeparator: Char = '.'; ThousandSeparator: Char = ','): string;
