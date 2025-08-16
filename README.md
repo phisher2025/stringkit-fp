@@ -6,12 +6,30 @@
 [![Documentation](https://img.shields.io/badge/Docs-Available-brightgreen.svg)](docs/)
 [![Tests](https://img.shields.io/badge/Tests-Passing-brightgreen.svg)](tests/)
 [![Status](https://img.shields.io/badge/Status-Ready%20to%20Weave-brightgreen.svg)]()
-[![Version](https://img.shields.io/badge/Version-1.5.0-blueviolet.svg)]()
+[![Version](https://img.shields.io/badge/Version-1.6.0-blueviolet.svg)]()
 
 
 <p align="center">
   <img src="assets/logo-v1-320.png" alt="StringKit-FP Logo" width="320"/>
 </p>
+
+
+## 📚 Table of Contents
+
+- [Why Choose StringKit-FP?](#-why-choose-stringkit-fp)
+- [Feature Overview](#-feature-overview)
+- [Installation (Lazarus IDE)](#-installation-lazarus-ide)
+- [Manual Installation (General)](#-manual-installation-general)
+- [Usage](#-usage)
+  - [Quick Start](#-quick-start)
+  - [Instance-Style API via Type Helpers](#-instance-style-api-via-type-helpers)
+  - [Modular Helper via Feature Flags (1.6.0+)](#️-modular-helper-via-feature-flags-160)
+- [Start Weaving: Quick Thread Patterns](#-start-weaving-quick-thread-patterns)
+- [System Requirements](#-system-requirements)
+- [Documentation](#-documentation)
+- [Testing](#-testing)
+- [License](#-license)
+- [Changelog](CHANGELOG.md#release-160---2025-08-16)
 
 
 ## 🧵 Why Choose StringKit-FP?
@@ -149,6 +167,29 @@ uses
   StringKit;           // All string operations
 ```
 
+### 🚀 Quick Start
+
+Minimal end-to-end usage with static and helper APIs:
+
+```pascal
+uses
+  SysUtils,
+  StringKit,
+  StringKitHelper; // enable instance-style helper
+
+begin
+  // Validation (helper)
+  if 'user@example.com'.IsValidEmail then
+    WriteLn('Valid email');
+
+  // Formatting (static)
+  WriteLn(TStringKit.FormatFileSize(1048576)); // 1.00 MB
+
+  // Encoding (helper)
+  WriteLn('foo'.Encode64); // Zm9v
+end.
+```
+
 ### 🧩 Instance-Style API via Type Helpers
 
 StringKit also provides a string type helper for more natural, instance-style calls.
@@ -175,6 +216,32 @@ end;
 Notes:
 - Add `StringKitHelper` to your unit's `uses` clause to enable helper methods.
 - Most `TStringKit` string-first methods are available via the helper for convenience; methods that don't operate on a source string may remain as static calls.
+
+#### ⚙️ Modular Helper via Feature Flags (1.6.0+)
+
+As of 1.6.0, `TStringHelperEx` is modularized using conditional includes to let you select which groups compile into the helper.
+
+- Default: if no symbols are defined, `SK_ALL` enables all groups.
+- Selective mode: define `SK_ANY` and then enable specific groups you need.
+
+Available groups:
+
+- `SK_MANIP` — trim, pad, collapse whitespace, reverse, length, substring
+- `SK_MATCH` — regex match/extract, contains/starts/ends, words, counts
+- `SK_COMPARE` — Levenshtein, Hamming, Jaro/Jaro-Winkler, LCS, fuzzy
+- `SK_CASE` — title, camel, pascal, snake, kebab
+- `SK_VALIDATE` — email, URL, IP (v4/v6), date
+- `SK_FORMAT` — truncate, file size, number/float formatting
+- `SK_NUMERIC` — roman, ordinal, number-to-words, from-roman
+- `SK_ENCODE` — hex, base64, HTML, URL encode/decode
+- `SK_SPLIT` — split, join
+- `SK_PHONETIC` — soundex, metaphone, readability, ngrams, basic counts
+
+Notes:
+
+- Implementation and interface includes live under `src/inc/` and are pulled from `src/StringKitHelper.pas` using `{$I ...}`.
+- When `SK_ALL` (default) is active, the helper API matches the full surface as before.
+- See also: [CHANGELOG 1.6.0](CHANGELOG.md#release-160---2025-08-16) for the summary.
 
 ## 🎨 Start Weaving: Quick Thread Patterns
 
@@ -465,7 +532,6 @@ $ ./TestRunner.exe -a --format=plain
 *Our roadmap for expanding the string artisan's toolkit*
 
 - **🌍 International Thread Support**: Enhance multi-byte character weaving for global text tapestries
-- **⚡ High-Speed Looms**: Optimize core algorithms for industrial-scale string processing
 - **📦 Loom Integration**: Seamless support for Free Pascal and Lazarus package managers
 
 

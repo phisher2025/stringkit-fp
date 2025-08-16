@@ -6,6 +6,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## Release [1.6.0] - 2025-08-16
+
+### Added
+
+- Modularized the `TStringHelperEx` type helper using conditional include files (`.intf.inc` / `.impl.inc`) grouped by feature. This enables selective compilation of helper methods while preserving the existing API when all features are enabled.
+- Feature flags for selective builds:
+  - `SK_ALL` — enable all helper features (default when no flags provided)
+  - `SK_ANY` — opt into selective mode, then enable one or more of:
+    - `SK_MANIP`, `SK_MATCH`, `SK_COMPARE`, `SK_CASE`, `SK_VALIDATE`, `SK_FORMAT`, `SK_NUMERIC`, `SK_ENCODE`, `SK_SPLIT`, `SK_PHONETIC`
+- Documentation: README section “Modular Helper via Feature Flags (1.6.0+)” with examples for Delphi and FPC/Lazarus conditional defines.
+
+### Changed
+
+- Internal organization of `src/StringKitHelper.pas` to include feature groups from `src/inc/` via `{$I ...}` includes, improving maintainability and build-time flexibility.
+- Version badge in `README.md` updated to 1.6.0.
+
+### Fixed
+
+- No functional changes; refactor validated by the full test suite (144 tests) passing with all features enabled (`SK_ALL`).
+
+
 ## Release [1.5.0] - 2025-08-15
 
 ### Added
