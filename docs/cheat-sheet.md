@@ -31,6 +31,19 @@ Notes:
 - Chaining is supported because helpers return strings (e.g., `'text'.Trim.ToLower`).
 - Use static `TStringKit` calls for operations that don't act on a source string (e.g., number conversions), or when passing non-string types.
 
+### ⚙️ Feature flags (1.6.0+)
+
+`TStringHelperEx` is modularized. By default all features are enabled. To slim the helper:
+
+- Default: `SK_ALL` (applies when no symbols defined)
+- Selective: define `SK_ANY` and then one or more of:
+  - `SK_MANIP`, `SK_MATCH`, `SK_COMPARE`, `SK_CASE`, `SK_VALIDATE`, `SK_FORMAT`, `SK_NUMERIC`, `SK_ENCODE`, `SK_SPLIT`, `SK_PHONETIC`
+
+See details:
+
+- README: Modular Helper section (`README.md` → “Modular Helper via Feature Flags (1.6.0+)”)
+- Changelog: [CHANGELOG 1.6.0](../CHANGELOG.md#release-160---2025-08-16)
+
 ### Using static methods (type-first)
 
 ```pascal
