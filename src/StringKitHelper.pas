@@ -17,14 +17,8 @@ unit StringKitHelper;
       // Original static call still works:
       S := TStringKit.Trim('  hello  ');
     end;
-    
-  Generated on: 2025-02-15
-  Total TStringKit class functions: 120
-  Helper methods generated: 98
-  Methods skipped (no string parameter): 22
-  
-  Skipped methods (no string parameter):
-    - IsWhiteSpace, Min2, Min3, Max2, ToRoman, ToOrdinal, NumberToWords, etc.
+
+  See docs/stringkit-helper-coverage.md for details.
 }
 
 {$mode objfpc}{$H+}{$J-}

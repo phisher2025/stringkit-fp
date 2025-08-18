@@ -1,0 +1,288 @@
+﻿{
+    "TStringKitPublicCount":  70,
+    "HelperMethodCount":  70,
+    "Covered":  67,
+    "Missing":  3,
+    "Methods":  [
+                    {
+                        "Name":  "Trim",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "TrimLeft",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "TrimRight",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "ToUpper",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "ToLower",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "PadCenter",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "PadLeft",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "PadRight",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "CollapseWhitespace",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "RemoveWhitespace",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "DuplicateText",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "ReverseText",
+                        "InHelper":  "No"
+                    },
+                    {
+                        "Name":  "CapitalizeText",
+                        "InHelper":  "No"
+                    },
+                    {
+                        "Name":  "ExtractMatches",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "ExtractAllMatches",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "MatchesPattern",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "ReplaceRegEx",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "ReplaceText",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "GetWords",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "CountSubString",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "Contains",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "StartsWith",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "EndsWith",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "IsEmpty",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "GetLength",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "SubString",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "LeftStr",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "RightStr",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "LevenshteinDistance",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "LevenshteinSimilarity",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "HammingDistance",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "JaroSimilarity",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "JaroWinklerSimilarity",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "LongestCommonSubsequence",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "LCSSimilarity",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "IsFuzzyMatch",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "ToTitleCase",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "ToCamelCase",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "ToPascalCase",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "ToSnakeCase",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "ToKebabCase",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "IsValidEmail",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "IsValidURL",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "IsValidIP",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "IsValidIPv4",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "IsValidIPv6",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "IsValidDate",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "Truncate",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "FormatFileSize",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "FormatNumber",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "FormatFloat",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "Join",
+                        "InHelper":  "No"
+                    },
+                    {
+                        "Name":  "Split",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "Soundex",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "Metaphone",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "CountWords",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "FleschKincaidReadability",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "GenerateNGrams",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "HTMLEncode",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "HTMLDecode",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "URLEncode",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "URLDecode",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "Encode64",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "Decode64",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "ToRoman",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "FromRoman",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "ToOrdinal",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "NumberToWords",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "HexEncode",
+                        "InHelper":  "Yes"
+                    },
+                    {
+                        "Name":  "HexDecode",
+                        "InHelper":  "Yes"
+                    }
+                ]
+}

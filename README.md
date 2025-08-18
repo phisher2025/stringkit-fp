@@ -243,6 +243,52 @@ Notes:
 - When `SK_ALL` (default) is active, the helper API matches the full surface as before.
 - See also: [CHANGELOG 1.6.0](CHANGELOG.md#release-160---2025-08-16) for the summary.
 
+##### 🚀 SK_ENCODE Quick Start (helper-only)
+
+Enable only encoding/decoding helpers via feature flags, then use `StringKitHelper` without static calls.
+
+- Delphi: Project > Options > Building > Delphi compiler > Conditional defines
+  - `SK_ANY;SK_ENCODE`
+- Lazarus (FPC): Project Options > Compiler Options > Custom Options
+  - `-dSK_ANY -dSK_ENCODE`
+
+Uses:
+
+```pascal
+uses SysUtils, StringKitHelper;
+```
+
+Examples:
+
+```pascal
+begin
+  // 1) Base64
+  WriteLn('foo'.Encode64);    // Zm9v
+  WriteLn('Zm9v'.Decode64);   // foo
+
+  // 2) URL
+  WriteLn('Hello World!'.URLEncode);    // Hello+World%21
+  WriteLn('Hello+World%21'.URLDecode);  // Hello World!
+
+  // 3) HTML
+  WriteLn('<b>Hi</b>'.HTMLEncode);           // &lt;b&gt;Hi&lt;/b&gt;
+  WriteLn('&lt;b&gt;Hi&lt;/b&gt;'.HTMLDecode);  // <b>Hi</b>
+
+  // 4) Hex
+  WriteLn('abc'.HexEncode);     // 616263
+  WriteLn('616263'.HexDecode);  // abc
+
+  // 5) Chaining (HTML then URL)
+  WriteLn('<p class="x">'.HTMLEncode.URLEncode);
+end.
+```
+
+Note on defines scope:
+
+- `{$DEFINE ...}` inside your program controls conditional blocks in your program only. It does not affect how `src/StringKitHelper.pas` is compiled in a separate unit.
+- To actually compile the helper with only `SK_ENCODE`, set defines at the project/build level so the compiler sees them when compiling `StringKitHelper.pas`:
+  - Lazarus/FPC: Project Options > Compiler Options > Custom Options → `-dSK_ANY -dSK_ENCODE`
+
 ## 🎨 Start Weaving: Quick Thread Patterns
 
 ### 🎨 **Thread Dyeing & Styling**
