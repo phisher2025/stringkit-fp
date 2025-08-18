@@ -23,13 +23,13 @@
 - [Usage](#-usage)
   - [Quick Start](#-quick-start)
   - [Instance-Style API via Type Helpers](#-instance-style-api-via-type-helpers)
-  - [Modular Helper via Feature Flags (1.6.0+)](#️-modular-helper-via-feature-flags-160)
+  - [Modular Helper via Feature Flags (1.6.0+)](#modular-helper)
 - [Start Weaving: Quick Thread Patterns](#-start-weaving-quick-thread-patterns)
 - [System Requirements](#-system-requirements)
 - [Documentation](#-documentation)
 - [Testing](#-testing)
 - [License](#-license)
-- [Changelog](CHANGELOG.md#release-160---2025-08-16)
+- [Changelog](CHANGELOG.md)
 
 
 ## 🧵 Why Choose StringKit-FP?
@@ -217,6 +217,7 @@ Notes:
 - Add `StringKitHelper` to your unit's `uses` clause to enable helper methods.
 - Most `TStringKit` string-first methods are available via the helper for convenience; methods that don't operate on a source string may remain as static calls.
 
+<a id="modular-helper"></a>
 #### ⚙️ Modular Helper via Feature Flags (1.6.0+)
 
 As of 1.6.0, `TStringHelperEx` is modularized using conditional includes to let you select which groups compile into the helper.
@@ -445,7 +446,6 @@ begin
   // Base64 encoding/decoding
   Encoded := TStringKit.Encode64('foo');               // Returns: 'Zm9v'
   Decoded := TStringKit.Decode64('Zm8=');              // Returns: 'fo'
-  Decoded := TStringKit.Decode64('Zg==');              // Returns: 'f'
   
   // Hexadecimal encoding
   Encoded := TStringKit.HexEncode('Hello');            // Returns: '48656C6C6F'
@@ -553,7 +553,7 @@ end;
 For detailed documentation, see:
 
 - 📋 [Cheat Sheet](docs/cheat-sheet.md)
-- 📝 [StringKit String Helper Coverate](docs/stringkit-helper-coverage.md)
+- 📝 [StringKit Helper Coverage](docs/stringkit-helper-coverage.md)
  
 
 ## ✅ Testing
@@ -571,8 +571,10 @@ $ ./TestRunner.exe -a --format=plain
 
 *Our roadmap for expanding the string artisan's toolkit*
 
-- **🌍 International Thread Support**: Enhance multi-byte character weaving for global text tapestries
-- **📦 Loom Integration**: Seamless support for Free Pascal and Lazarus package managers
+- Remove custom types and use RTL types
+- Introduce custom method for hashing
+- Enhance multi-byte character weaving for global text tapestries
+- Seamless support for Free Pascal and Lazarus package managers
 
 
 ## 🤝 **Join the Weaving Circle**
