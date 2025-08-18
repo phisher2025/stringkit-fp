@@ -1,72 +1,72 @@
-﻿| Method | In Helper |
-|---|---|
-| Trim | Yes |
-| TrimLeft | Yes |
-| TrimRight | Yes |
-| ToUpper | Yes |
-| ToLower | Yes |
-| PadCenter | Yes |
-| PadLeft | Yes |
-| PadRight | Yes |
-| CollapseWhitespace | Yes |
-| RemoveWhitespace | Yes |
-| DuplicateText | Yes |
-| ReverseText | No |
-| CapitalizeText | No |
-| ExtractMatches | Yes |
-| ExtractAllMatches | Yes |
-| MatchesPattern | Yes |
-| ReplaceRegEx | Yes |
-| ReplaceText | Yes |
-| GetWords | Yes |
-| CountSubString | Yes |
-| Contains | Yes |
-| StartsWith | Yes |
-| EndsWith | Yes |
-| IsEmpty | Yes |
-| GetLength | Yes |
-| SubString | Yes |
-| LeftStr | Yes |
-| RightStr | Yes |
-| LevenshteinDistance | Yes |
-| LevenshteinSimilarity | Yes |
-| HammingDistance | Yes |
-| JaroSimilarity | Yes |
-| JaroWinklerSimilarity | Yes |
-| LongestCommonSubsequence | Yes |
-| LCSSimilarity | Yes |
-| IsFuzzyMatch | Yes |
-| ToTitleCase | Yes |
-| ToCamelCase | Yes |
-| ToPascalCase | Yes |
-| ToSnakeCase | Yes |
-| ToKebabCase | Yes |
-| IsValidEmail | Yes |
-| IsValidURL | Yes |
-| IsValidIP | Yes |
-| IsValidIPv4 | Yes |
-| IsValidIPv6 | Yes |
-| IsValidDate | Yes |
-| Truncate | Yes |
-| FormatFileSize | Yes |
-| FormatNumber | Yes |
-| FormatFloat | Yes |
-| Join | No |
-| Split | Yes |
-| Soundex | Yes |
-| Metaphone | Yes |
-| CountWords | Yes |
-| FleschKincaidReadability | Yes |
-| GenerateNGrams | Yes |
-| HTMLEncode | Yes |
-| HTMLDecode | Yes |
-| URLEncode | Yes |
-| URLDecode | Yes |
-| Encode64 | Yes |
-| Decode64 | Yes |
-| ToRoman | Yes |
-| FromRoman | Yes |
-| ToOrdinal | Yes |
-| NumberToWords | Yes |
-| HexEncode | Yes |
-| HexDecode | Yes |
+﻿| Method | In Helper | Helper Name | Helper Category | Helper File |
+|---|---|---|---|---|
+| Trim | Yes | Trim | Manip | Manip.intf.inc |
+| TrimLeft | Yes | TrimLeft | Manip | Manip.intf.inc |
+| TrimRight | Yes | TrimRight | Manip | Manip.intf.inc |
+| ToUpper | Yes | ToUpper | Manip | Manip.intf.inc |
+| ToLower | Yes | ToLower | Manip | Manip.intf.inc |
+| PadCenter | Yes | PadCenter | Manip | Manip.intf.inc |
+| PadLeft | Yes | PadLeft | Manip | Manip.intf.inc |
+| PadRight | Yes | PadRight | Manip | Manip.intf.inc |
+| CollapseWhitespace | Yes | CollapseWhitespace | Manip | Manip.intf.inc |
+| RemoveWhitespace | Yes | RemoveWhitespace | Manip | Manip.intf.inc |
+| DuplicateText | Yes | DuplicateText | Manip | Manip.intf.inc |
+| ReverseText | No |  |  |  |
+| CapitalizeText | No |  |  |  |
+| ExtractMatches | Yes | ExtractMatches | Match | Match.intf.inc |
+| ExtractAllMatches | Yes | ExtractAllMatches | Match | Match.intf.inc |
+| MatchesPattern | Yes | MatchesPattern | Match | Match.intf.inc |
+| ReplaceRegEx | Yes | ReplaceRegEx | Match | Match.intf.inc |
+| ReplaceText | Yes | ReplaceText | Match | Match.intf.inc |
+| GetWords | Yes | GetWords | Match | Match.intf.inc |
+| CountSubString | Yes | CountSubString | Match | Match.intf.inc |
+| Contains | Yes | Contains | Match | Match.intf.inc |
+| StartsWith | Yes | StartsWith | Match | Match.intf.inc |
+| EndsWith | Yes | EndsWith | Match | Match.intf.inc |
+| IsEmpty | Yes | IsEmpty | Manip | Manip.intf.inc |
+| GetLength | Yes | GetLength | Manip | Manip.intf.inc |
+| SubString | Yes | SubString | Manip | Manip.intf.inc |
+| LeftStr | Yes | LeftStr | Manip | Manip.intf.inc |
+| RightStr | Yes | RightStr | Manip | Manip.intf.inc |
+| LevenshteinDistance | Yes | LevenshteinDistance | Compare | Compare.intf.inc |
+| LevenshteinSimilarity | Yes | LevenshteinSimilarity | Compare | Compare.intf.inc |
+| HammingDistance | Yes | HammingDistance | Compare | Compare.intf.inc |
+| JaroSimilarity | Yes | JaroSimilarity | Compare | Compare.intf.inc |
+| JaroWinklerSimilarity | Yes | JaroWinklerSimilarity | Compare | Compare.intf.inc |
+| LongestCommonSubsequence | Yes | LongestCommonSubsequence | Compare | Compare.intf.inc |
+| LCSSimilarity | Yes | LCSSimilarity | Compare | Compare.intf.inc |
+| IsFuzzyMatch | Yes | IsFuzzyMatch | Compare | Compare.intf.inc |
+| ToTitleCase | Yes | ToTitleCase | Case | Case.intf.inc |
+| ToCamelCase | Yes | ToCamelCase | Case | Case.intf.inc |
+| ToPascalCase | Yes | ToPascalCase | Case | Case.intf.inc |
+| ToSnakeCase | Yes | ToSnakeCase | Case | Case.intf.inc |
+| ToKebabCase | Yes | ToKebabCase | Case | Case.intf.inc |
+| IsValidEmail | Yes | IsValidEmail | Validate | Validate.intf.inc |
+| IsValidURL | Yes | IsValidURL | Validate | Validate.intf.inc |
+| IsValidIP | Yes | IsValidIP | Validate | Validate.intf.inc |
+| IsValidIPv4 | Yes | IsValidIPv4 | Validate | Validate.intf.inc |
+| IsValidIPv6 | Yes | IsValidIPv6 | Validate | Validate.intf.inc |
+| IsValidDate | Yes | IsValidDate | Validate | Validate.intf.inc |
+| Truncate | Yes | Truncate | Format | Format.intf.inc |
+| FormatFileSize | Yes | FormatFileSize | Format | Format.intf.inc |
+| FormatNumber | Yes | FormatNumber | Format | Format.intf.inc |
+| FormatFloat | Yes | FormatFloat | Format | Format.intf.inc |
+| Join | No |  |  |  |
+| Split | Yes | Split | Split | Split.intf.inc |
+| Soundex | Yes | Soundex | Phonetic | Phonetic.intf.inc |
+| Metaphone | Yes | Metaphone | Phonetic | Phonetic.intf.inc |
+| CountWords | Yes | CountWords | Phonetic | Phonetic.intf.inc |
+| FleschKincaidReadability | Yes | FleschKincaidReadability | Phonetic | Phonetic.intf.inc |
+| GenerateNGrams | Yes | GenerateNGrams | Phonetic | Phonetic.intf.inc |
+| HTMLEncode | Yes | HTMLEncode | Encode | Encode.intf.inc |
+| HTMLDecode | Yes | HTMLDecode | Encode | Encode.intf.inc |
+| URLEncode | Yes | URLEncode | Encode | Encode.intf.inc |
+| URLDecode | Yes | URLDecode | Encode | Encode.intf.inc |
+| Encode64 | Yes | Encode64 | Encode | Encode.intf.inc |
+| Decode64 | Yes | Decode64 | Encode | Encode.intf.inc |
+| ToRoman | Yes | ToRoman | Numeric | Numeric.intf.inc |
+| FromRoman | Yes | FromRoman | Numeric | Numeric.intf.inc |
+| ToOrdinal | Yes | ToOrdinal | Numeric | Numeric.intf.inc |
+| NumberToWords | Yes | NumberToWords | Numeric | Numeric.intf.inc |
+| HexEncode | Yes | HexEncode | Encode | Encode.intf.inc |
+| HexDecode | Yes | HexDecode | Encode | Encode.intf.inc |

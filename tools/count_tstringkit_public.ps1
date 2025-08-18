@@ -57,10 +57,21 @@ try {
   $tkCount = $tkNames.Count
 
   $helperFiles = Get-ChildItem -Path $IncDir -Filter '*.intf.inc' | Sort-Object Name
-  $helperText  = ($helperFiles | Get-Content) -join "`n"
-  $hMatches    = [regex]::Matches($helperText,'^\s*function\s+(\w+)\b', 'Multiline')
-  $hNames      = $hMatches | ForEach-Object { $_.Groups[1].Value } | Sort-Object -Unique
-  $hSet        = [System.Collections.Generic.HashSet[string]]::new([string[]]$hNames)
+  # Build a map: Helper function name -> { Name, File, Category }
+  $hMap = @{}
+  foreach ($hf in $helperFiles) {
+    $cat = [System.IO.Path]::GetFileNameWithoutExtension([System.IO.Path]::GetFileNameWithoutExtension($hf.Name))
+    $fileContent = Get-Content -LiteralPath $hf.FullName -Raw
+    $matches = [regex]::Matches($fileContent,'(?m)^\s*function\s+(\w+)\b')
+    foreach ($m in $matches) {
+      $fn = $m.Groups[1].Value
+      if (-not $hMap.ContainsKey($fn)) {
+        $hMap[$fn] = [PSCustomObject]@{ Name = $fn; File = $hf.Name; Category = $cat }
+      }
+    }
+  }
+  $hNames = $hMap.Keys | Sort-Object -Unique
+  $hSet   = [System.Collections.Generic.HashSet[string]]::new([string[]]$hNames)
 
   # Known alias mappings (TStringKitName -> HelperName)
   $aliasMap = [ordered]@{
@@ -70,9 +81,14 @@ try {
   }
 
   $rows = foreach ($n in $tkNames) {
+    $inHelper = $hSet.Contains($n)
+    $hInfo = if ($inHelper) { $hMap[$n] } else { $null }
     [PSCustomObject]@{
-      Name     = $n
-      InHelper = if ($hSet.Contains($n)) { 'Yes' } else { 'No' }
+      Name            = $n
+      InHelper        = if ($inHelper) { 'Yes' } else { 'No' }
+      HelperName      = if ($hInfo) { $hInfo.Name } else { '' }
+      HelperCategory  = if ($hInfo) { $hInfo.Category } else { '' }
+      HelperFile      = if ($hInfo) { $hInfo.File } else { '' }
     }
   }
 
@@ -102,9 +118,9 @@ try {
   # Write coverage markdown
   $coveragePath = Join-Path $outDir 'coverage.md'
   $md = @()
-  $md += '| Method | In Helper |'
-  $md += '|---|---|'
-  foreach ($r in $rows) { $md += "| $($r.Name) | $($r.InHelper) |" }
+  $md += '| Method | In Helper | Helper Name | Helper Category | Helper File |'
+  $md += '|---|---|---|---|---|'
+  foreach ($r in $rows) { $md += "| $($r.Name) | $($r.InHelper) | $($r.HelperName) | $($r.HelperCategory) | $($r.HelperFile) |" }
   $md | Set-Content -Path $coveragePath -Encoding UTF8
 
   # Also write a machine-readable JSON if needed

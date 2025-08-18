@@ -6,283 +6,493 @@
     "Methods":  [
                     {
                         "Name":  "Trim",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "Trim",
+                        "HelperCategory":  "Manip",
+                        "HelperFile":  "Manip.intf.inc"
                     },
                     {
                         "Name":  "TrimLeft",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "TrimLeft",
+                        "HelperCategory":  "Manip",
+                        "HelperFile":  "Manip.intf.inc"
                     },
                     {
                         "Name":  "TrimRight",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "TrimRight",
+                        "HelperCategory":  "Manip",
+                        "HelperFile":  "Manip.intf.inc"
                     },
                     {
                         "Name":  "ToUpper",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "ToUpper",
+                        "HelperCategory":  "Manip",
+                        "HelperFile":  "Manip.intf.inc"
                     },
                     {
                         "Name":  "ToLower",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "ToLower",
+                        "HelperCategory":  "Manip",
+                        "HelperFile":  "Manip.intf.inc"
                     },
                     {
                         "Name":  "PadCenter",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "PadCenter",
+                        "HelperCategory":  "Manip",
+                        "HelperFile":  "Manip.intf.inc"
                     },
                     {
                         "Name":  "PadLeft",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "PadLeft",
+                        "HelperCategory":  "Manip",
+                        "HelperFile":  "Manip.intf.inc"
                     },
                     {
                         "Name":  "PadRight",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "PadRight",
+                        "HelperCategory":  "Manip",
+                        "HelperFile":  "Manip.intf.inc"
                     },
                     {
                         "Name":  "CollapseWhitespace",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "CollapseWhitespace",
+                        "HelperCategory":  "Manip",
+                        "HelperFile":  "Manip.intf.inc"
                     },
                     {
                         "Name":  "RemoveWhitespace",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "RemoveWhitespace",
+                        "HelperCategory":  "Manip",
+                        "HelperFile":  "Manip.intf.inc"
                     },
                     {
                         "Name":  "DuplicateText",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "DuplicateText",
+                        "HelperCategory":  "Manip",
+                        "HelperFile":  "Manip.intf.inc"
                     },
                     {
                         "Name":  "ReverseText",
-                        "InHelper":  "No"
+                        "InHelper":  "No",
+                        "HelperName":  "",
+                        "HelperCategory":  "",
+                        "HelperFile":  ""
                     },
                     {
                         "Name":  "CapitalizeText",
-                        "InHelper":  "No"
+                        "InHelper":  "No",
+                        "HelperName":  "",
+                        "HelperCategory":  "",
+                        "HelperFile":  ""
                     },
                     {
                         "Name":  "ExtractMatches",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "ExtractMatches",
+                        "HelperCategory":  "Match",
+                        "HelperFile":  "Match.intf.inc"
                     },
                     {
                         "Name":  "ExtractAllMatches",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "ExtractAllMatches",
+                        "HelperCategory":  "Match",
+                        "HelperFile":  "Match.intf.inc"
                     },
                     {
                         "Name":  "MatchesPattern",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "MatchesPattern",
+                        "HelperCategory":  "Match",
+                        "HelperFile":  "Match.intf.inc"
                     },
                     {
                         "Name":  "ReplaceRegEx",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "ReplaceRegEx",
+                        "HelperCategory":  "Match",
+                        "HelperFile":  "Match.intf.inc"
                     },
                     {
                         "Name":  "ReplaceText",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "ReplaceText",
+                        "HelperCategory":  "Match",
+                        "HelperFile":  "Match.intf.inc"
                     },
                     {
                         "Name":  "GetWords",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "GetWords",
+                        "HelperCategory":  "Match",
+                        "HelperFile":  "Match.intf.inc"
                     },
                     {
                         "Name":  "CountSubString",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "CountSubString",
+                        "HelperCategory":  "Match",
+                        "HelperFile":  "Match.intf.inc"
                     },
                     {
                         "Name":  "Contains",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "Contains",
+                        "HelperCategory":  "Match",
+                        "HelperFile":  "Match.intf.inc"
                     },
                     {
                         "Name":  "StartsWith",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "StartsWith",
+                        "HelperCategory":  "Match",
+                        "HelperFile":  "Match.intf.inc"
                     },
                     {
                         "Name":  "EndsWith",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "EndsWith",
+                        "HelperCategory":  "Match",
+                        "HelperFile":  "Match.intf.inc"
                     },
                     {
                         "Name":  "IsEmpty",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "IsEmpty",
+                        "HelperCategory":  "Manip",
+                        "HelperFile":  "Manip.intf.inc"
                     },
                     {
                         "Name":  "GetLength",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "GetLength",
+                        "HelperCategory":  "Manip",
+                        "HelperFile":  "Manip.intf.inc"
                     },
                     {
                         "Name":  "SubString",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "SubString",
+                        "HelperCategory":  "Manip",
+                        "HelperFile":  "Manip.intf.inc"
                     },
                     {
                         "Name":  "LeftStr",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "LeftStr",
+                        "HelperCategory":  "Manip",
+                        "HelperFile":  "Manip.intf.inc"
                     },
                     {
                         "Name":  "RightStr",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "RightStr",
+                        "HelperCategory":  "Manip",
+                        "HelperFile":  "Manip.intf.inc"
                     },
                     {
                         "Name":  "LevenshteinDistance",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "LevenshteinDistance",
+                        "HelperCategory":  "Compare",
+                        "HelperFile":  "Compare.intf.inc"
                     },
                     {
                         "Name":  "LevenshteinSimilarity",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "LevenshteinSimilarity",
+                        "HelperCategory":  "Compare",
+                        "HelperFile":  "Compare.intf.inc"
                     },
                     {
                         "Name":  "HammingDistance",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "HammingDistance",
+                        "HelperCategory":  "Compare",
+                        "HelperFile":  "Compare.intf.inc"
                     },
                     {
                         "Name":  "JaroSimilarity",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "JaroSimilarity",
+                        "HelperCategory":  "Compare",
+                        "HelperFile":  "Compare.intf.inc"
                     },
                     {
                         "Name":  "JaroWinklerSimilarity",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "JaroWinklerSimilarity",
+                        "HelperCategory":  "Compare",
+                        "HelperFile":  "Compare.intf.inc"
                     },
                     {
                         "Name":  "LongestCommonSubsequence",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "LongestCommonSubsequence",
+                        "HelperCategory":  "Compare",
+                        "HelperFile":  "Compare.intf.inc"
                     },
                     {
                         "Name":  "LCSSimilarity",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "LCSSimilarity",
+                        "HelperCategory":  "Compare",
+                        "HelperFile":  "Compare.intf.inc"
                     },
                     {
                         "Name":  "IsFuzzyMatch",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "IsFuzzyMatch",
+                        "HelperCategory":  "Compare",
+                        "HelperFile":  "Compare.intf.inc"
                     },
                     {
                         "Name":  "ToTitleCase",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "ToTitleCase",
+                        "HelperCategory":  "Case",
+                        "HelperFile":  "Case.intf.inc"
                     },
                     {
                         "Name":  "ToCamelCase",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "ToCamelCase",
+                        "HelperCategory":  "Case",
+                        "HelperFile":  "Case.intf.inc"
                     },
                     {
                         "Name":  "ToPascalCase",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "ToPascalCase",
+                        "HelperCategory":  "Case",
+                        "HelperFile":  "Case.intf.inc"
                     },
                     {
                         "Name":  "ToSnakeCase",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "ToSnakeCase",
+                        "HelperCategory":  "Case",
+                        "HelperFile":  "Case.intf.inc"
                     },
                     {
                         "Name":  "ToKebabCase",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "ToKebabCase",
+                        "HelperCategory":  "Case",
+                        "HelperFile":  "Case.intf.inc"
                     },
                     {
                         "Name":  "IsValidEmail",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "IsValidEmail",
+                        "HelperCategory":  "Validate",
+                        "HelperFile":  "Validate.intf.inc"
                     },
                     {
                         "Name":  "IsValidURL",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "IsValidURL",
+                        "HelperCategory":  "Validate",
+                        "HelperFile":  "Validate.intf.inc"
                     },
                     {
                         "Name":  "IsValidIP",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "IsValidIP",
+                        "HelperCategory":  "Validate",
+                        "HelperFile":  "Validate.intf.inc"
                     },
                     {
                         "Name":  "IsValidIPv4",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "IsValidIPv4",
+                        "HelperCategory":  "Validate",
+                        "HelperFile":  "Validate.intf.inc"
                     },
                     {
                         "Name":  "IsValidIPv6",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "IsValidIPv6",
+                        "HelperCategory":  "Validate",
+                        "HelperFile":  "Validate.intf.inc"
                     },
                     {
                         "Name":  "IsValidDate",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "IsValidDate",
+                        "HelperCategory":  "Validate",
+                        "HelperFile":  "Validate.intf.inc"
                     },
                     {
                         "Name":  "Truncate",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "Truncate",
+                        "HelperCategory":  "Format",
+                        "HelperFile":  "Format.intf.inc"
                     },
                     {
                         "Name":  "FormatFileSize",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "FormatFileSize",
+                        "HelperCategory":  "Format",
+                        "HelperFile":  "Format.intf.inc"
                     },
                     {
                         "Name":  "FormatNumber",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "FormatNumber",
+                        "HelperCategory":  "Format",
+                        "HelperFile":  "Format.intf.inc"
                     },
                     {
                         "Name":  "FormatFloat",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "FormatFloat",
+                        "HelperCategory":  "Format",
+                        "HelperFile":  "Format.intf.inc"
                     },
                     {
                         "Name":  "Join",
-                        "InHelper":  "No"
+                        "InHelper":  "No",
+                        "HelperName":  "",
+                        "HelperCategory":  "",
+                        "HelperFile":  ""
                     },
                     {
                         "Name":  "Split",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "Split",
+                        "HelperCategory":  "Split",
+                        "HelperFile":  "Split.intf.inc"
                     },
                     {
                         "Name":  "Soundex",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "Soundex",
+                        "HelperCategory":  "Phonetic",
+                        "HelperFile":  "Phonetic.intf.inc"
                     },
                     {
                         "Name":  "Metaphone",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "Metaphone",
+                        "HelperCategory":  "Phonetic",
+                        "HelperFile":  "Phonetic.intf.inc"
                     },
                     {
                         "Name":  "CountWords",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "CountWords",
+                        "HelperCategory":  "Phonetic",
+                        "HelperFile":  "Phonetic.intf.inc"
                     },
                     {
                         "Name":  "FleschKincaidReadability",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "FleschKincaidReadability",
+                        "HelperCategory":  "Phonetic",
+                        "HelperFile":  "Phonetic.intf.inc"
                     },
                     {
                         "Name":  "GenerateNGrams",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "GenerateNGrams",
+                        "HelperCategory":  "Phonetic",
+                        "HelperFile":  "Phonetic.intf.inc"
                     },
                     {
                         "Name":  "HTMLEncode",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "HTMLEncode",
+                        "HelperCategory":  "Encode",
+                        "HelperFile":  "Encode.intf.inc"
                     },
                     {
                         "Name":  "HTMLDecode",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "HTMLDecode",
+                        "HelperCategory":  "Encode",
+                        "HelperFile":  "Encode.intf.inc"
                     },
                     {
                         "Name":  "URLEncode",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "URLEncode",
+                        "HelperCategory":  "Encode",
+                        "HelperFile":  "Encode.intf.inc"
                     },
                     {
                         "Name":  "URLDecode",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "URLDecode",
+                        "HelperCategory":  "Encode",
+                        "HelperFile":  "Encode.intf.inc"
                     },
                     {
                         "Name":  "Encode64",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "Encode64",
+                        "HelperCategory":  "Encode",
+                        "HelperFile":  "Encode.intf.inc"
                     },
                     {
                         "Name":  "Decode64",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "Decode64",
+                        "HelperCategory":  "Encode",
+                        "HelperFile":  "Encode.intf.inc"
                     },
                     {
                         "Name":  "ToRoman",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "ToRoman",
+                        "HelperCategory":  "Numeric",
+                        "HelperFile":  "Numeric.intf.inc"
                     },
                     {
                         "Name":  "FromRoman",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "FromRoman",
+                        "HelperCategory":  "Numeric",
+                        "HelperFile":  "Numeric.intf.inc"
                     },
                     {
                         "Name":  "ToOrdinal",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "ToOrdinal",
+                        "HelperCategory":  "Numeric",
+                        "HelperFile":  "Numeric.intf.inc"
                     },
                     {
                         "Name":  "NumberToWords",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "NumberToWords",
+                        "HelperCategory":  "Numeric",
+                        "HelperFile":  "Numeric.intf.inc"
                     },
                     {
                         "Name":  "HexEncode",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "HexEncode",
+                        "HelperCategory":  "Encode",
+                        "HelperFile":  "Encode.intf.inc"
                     },
                     {
                         "Name":  "HexDecode",
-                        "InHelper":  "Yes"
+                        "InHelper":  "Yes",
+                        "HelperName":  "HexDecode",
+                        "HelperCategory":  "Encode",
+                        "HelperFile":  "Encode.intf.inc"
                     }
                 ]
 }
