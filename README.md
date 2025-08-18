@@ -553,14 +553,8 @@ end;
 For detailed documentation, see:
 
 - 📋 [Cheat Sheet](docs/cheat-sheet.md)
-- 📝 [Strings](docs/StringKit.Strings.md)
+- 📝 [StringKit String Helper Coverate](docs/stringkit-helper-coverage.md)
  
-
-## 💬 Community & Support
-
-- **Questions?** [Open a discussion](https://github.com/ikelaiah/stringkit-fp/discussions)
-- **Found a bug?** [Report an issue](https://github.com/ikelaiah/stringkit-fp/issues)
-
 
 ## ✅ Testing
 

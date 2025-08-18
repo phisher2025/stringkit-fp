@@ -85,3 +85,6 @@ Below is the full coverage summary with your requested columns.
 - TStringKit public methods: 70
 - String Helper methods: 70
 - All 70 are available in the helper (3 via alias names).
+  - ReverseText -> Reverse
+  - CapitalizeText -> Capitalize
+  - Join -> JoinWith

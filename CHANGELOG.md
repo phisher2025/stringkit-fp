@@ -6,6 +6,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
+## [2.0.0] - Unreleased
+
+### Breaking (planned)
+
+- Rename selected `TStringKit` members to align with helper naming:
+  - `ReverseText` → `Reverse`
+  - `CapitalizeText` → `Capitalize`
+  - `Join` → `JoinWith`
+
+Notes:
+- These will be hard renames in 2.0.0. Migration: replace calls per the mapping above.
+- Alternative considered: keep aliases in helper. We opted for simpler, consistent naming.
+
+---
+
 ## Release [1.6.0] - 2025-08-16
 
 ### Added
@@ -19,13 +34,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Internal organization of `src/StringKitHelper.pas` to include feature groups from `src/inc/` via `{$I ...}` includes, improving maintainability and build-time flexibility.
-- Version badge in `README.md` updated to 1.6.0.
+- No breaking changes. Existing APIs remain compatible when `SK_ALL` (default) is active.
+- Internal tooling: added `tools/count_tstringkit_public.ps1` to generate coverage between `TStringKit` and the helper. See `tools/count_tstringkit_public.README.md`.
+ - Internal organization of `src/StringKitHelper.pas` to include feature groups from `src/inc/` via `{$I ...}` includes, improving maintainability and build-time flexibility.
+ - Version badge in `README.md` updated to 1.6.0.
 
 ### Fixed
 
-- No functional changes; refactor validated by the full test suite (144 tests) passing with all features enabled (`SK_ALL`).
+- Minor documentation and formatting improvements across README and docs.
+ - No functional changes; refactor validated by the full test suite (144 tests) passing with all features enabled (`SK_ALL`).
 
+---
 
 ## Release [1.5.0] - 2025-08-15
 
