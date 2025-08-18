@@ -30,7 +30,7 @@ Notes:
   - `SK_ALL` — enable all helper features (default when no flags provided)
   - `SK_ANY` — opt into selective mode, then enable one or more of:
     - `SK_MANIP`, `SK_MATCH`, `SK_COMPARE`, `SK_CASE`, `SK_VALIDATE`, `SK_FORMAT`, `SK_NUMERIC`, `SK_ENCODE`, `SK_SPLIT`, `SK_PHONETIC`
-- Documentation: README section “Modular Helper via Feature Flags (1.6.0+)” with examples for Delphi and FPC/Lazarus conditional defines.
+- Documentation: README section “Modular Helper via Feature Flags (1.6.0+)” with examples for FPC/Lazarus conditional defines.
 
 ### Changed
 

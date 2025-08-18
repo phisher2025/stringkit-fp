@@ -28,13 +28,6 @@ Also ensure your project can find the units and includes:
 
 - Add `-Fu..\..\src -Fu..\..\src\inc` to "Other units" search paths or project options.
 
-## Delphi
-
-Project → Options → Building → Delphi compiler → Conditional defines
-
-- Encode-only: `SK_ANY;SK_ENCODE`
-- Case+Encode: `SK_ANY;SK_CASE;SK_ENCODE`
-
 Ensure the source and includes are on the search path.
 
 ## fpc (CLI)
@@ -43,14 +36,14 @@ From the repo root:
 
 ```bash
 fpc -dSK_ANY -dSK_ENCODE \
-  -Fu./src -Fu./src/inc \
-  examples/directives/EncodeOnlyDemo.lpr
+  -Fu./src \
+  examples/directives/EncodeOnlyDemo.pas
 ```
 
 ```bash
 fpc -dSK_ANY -dSK_CASE -dSK_ENCODE \
-  -Fu./src -Fu./src/inc \
-  examples/directives/CaseAndEncodeDemo.lpr
+  -Fu./src \
+  examples/directives/CaseAndEncodeDemo.pas
 ```
 
 ## Notes

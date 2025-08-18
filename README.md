@@ -217,7 +217,6 @@ Notes:
 - Add `StringKitHelper` to your unit's `uses` clause to enable helper methods.
 - Most `TStringKit` string-first methods are available via the helper for convenience; methods that don't operate on a source string may remain as static calls.
 
-<a id="modular-helper"></a>
 #### ⚙️ Modular Helper via Feature Flags (1.6.0+)
 
 As of 1.6.0, `TStringHelperEx` is modularized using conditional includes to let you select which groups compile into the helper.
@@ -248,8 +247,6 @@ Notes:
 
 Enable only encoding/decoding helpers via feature flags, then use `StringKitHelper` without static calls.
 
-- Delphi: Project > Options > Building > Delphi compiler > Conditional defines
-  - `SK_ANY;SK_ENCODE`
 - Lazarus (FPC): Project Options > Compiler Options > Custom Options
   - `-dSK_ANY -dSK_ENCODE`
 
