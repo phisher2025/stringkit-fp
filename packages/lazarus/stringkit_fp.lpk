@@ -8,8 +8,9 @@
       <Version Value="11"/>
       <PathDelim Value="\"/>
       <SearchPaths>
+        <IncludeFiles Value="..\..\src\inc"/>
         <OtherUnitFiles Value="..\..\src"/>
-        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)\"/>
+        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
       <CodeGeneration>
         <Optimizations>
@@ -42,11 +43,15 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. "/>
-    <Version Major="1"/>
+    <Version Major="1" Minor="6"/>
     <Files>
       <Item>
         <Filename Value="..\..\src\StringKit.pas"/>
         <UnitName Value="StringKit"/>
+      </Item>
+      <Item>
+        <Filename Value="..\..\src\StringKitHelper.pas"/>
+        <UnitName Value="StringKitHelper"/>
       </Item>
     </Files>
     <RequiredPkgs>

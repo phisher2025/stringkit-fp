@@ -8,7 +8,7 @@ unit stringkit_fp;
 interface
 
 uses
-  StringKit;
+  StringKit, StringKitHelper;
 
 implementation
 

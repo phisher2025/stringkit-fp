@@ -6,12 +6,30 @@
 [![Documentation](https://img.shields.io/badge/Docs-Available-brightgreen.svg)](docs/)
 [![Tests](https://img.shields.io/badge/Tests-Passing-brightgreen.svg)](tests/)
 [![Status](https://img.shields.io/badge/Status-Ready%20to%20Weave-brightgreen.svg)]()
-[![Version](https://img.shields.io/badge/Version-1.5.0-blueviolet.svg)]()
+[![Version](https://img.shields.io/badge/Version-1.6.0-blueviolet.svg)]()
 
 
 <p align="center">
   <img src="assets/logo-v1-320.png" alt="StringKit-FP Logo" width="320"/>
 </p>
+
+
+## 📚 Table of Contents
+
+- [Why Choose StringKit-FP?](#-why-choose-stringkit-fp)
+- [Feature Overview](#-feature-overview)
+- [Installation (Lazarus IDE)](#-installation-lazarus-ide)
+- [Manual Installation (General)](#-manual-installation-general)
+- [Usage](#-usage)
+  - [Quick Start](#-quick-start)
+  - [Instance-Style API via Type Helpers](#-instance-style-api-via-type-helpers)
+  - [Modular Helper via Feature Flags (1.6.0+)](#modular-helper)
+- [Start Weaving: Quick Thread Patterns](#-start-weaving-quick-thread-patterns)
+- [System Requirements](#-system-requirements)
+- [Documentation](#-documentation)
+- [Testing](#-testing)
+- [License](#-license)
+- [Changelog](CHANGELOG.md)
 
 
 ## 🧵 Why Choose StringKit-FP?
@@ -149,6 +167,29 @@ uses
   StringKit;           // All string operations
 ```
 
+### 🚀 Quick Start
+
+Minimal end-to-end usage with static and helper APIs:
+
+```pascal
+uses
+  SysUtils,
+  StringKit,
+  StringKitHelper; // enable instance-style helper
+
+begin
+  // Validation (helper)
+  if 'user@example.com'.IsValidEmail then
+    WriteLn('Valid email');
+
+  // Formatting (static)
+  WriteLn(TStringKit.FormatFileSize(1048576)); // 1.00 MB
+
+  // Encoding (helper)
+  WriteLn('foo'.Encode64); // Zm9v
+end.
+```
+
 ### 🧩 Instance-Style API via Type Helpers
 
 StringKit also provides a string type helper for more natural, instance-style calls.
@@ -175,6 +216,76 @@ end;
 Notes:
 - Add `StringKitHelper` to your unit's `uses` clause to enable helper methods.
 - Most `TStringKit` string-first methods are available via the helper for convenience; methods that don't operate on a source string may remain as static calls.
+
+#### ⚙️ Modular Helper via Feature Flags (1.6.0+)
+
+As of 1.6.0, `TStringHelperEx` is modularized using conditional includes to let you select which groups compile into the helper.
+
+- Default: if no symbols are defined, `SK_ALL` enables all groups.
+- Selective mode: define `SK_ANY` and then enable specific groups you need.
+
+Available groups:
+
+- `SK_MANIP` — trim, pad, collapse whitespace, reverse, length, substring
+- `SK_MATCH` — regex match/extract, contains/starts/ends, words, counts
+- `SK_COMPARE` — Levenshtein, Hamming, Jaro/Jaro-Winkler, LCS, fuzzy
+- `SK_CASE` — title, camel, pascal, snake, kebab
+- `SK_VALIDATE` — email, URL, IP (v4/v6), date
+- `SK_FORMAT` — truncate, file size, number/float formatting
+- `SK_NUMERIC` — roman, ordinal, number-to-words, from-roman
+- `SK_ENCODE` — hex, base64, HTML, URL encode/decode
+- `SK_SPLIT` — split, join
+- `SK_PHONETIC` — soundex, metaphone, readability, ngrams, basic counts
+
+Notes:
+
+- Implementation and interface includes live under `src/inc/` and are pulled from `src/StringKitHelper.pas` using `{$I ...}`.
+- When `SK_ALL` (default) is active, the helper API matches the full surface as before.
+- See also: [CHANGELOG 1.6.0](CHANGELOG.md#release-160---2025-08-16) for the summary.
+
+##### 🚀 SK_ENCODE Quick Start (helper-only)
+
+Enable only encoding/decoding helpers via feature flags, then use `StringKitHelper` without static calls.
+
+- Lazarus (FPC): Project Options > Compiler Options > Custom Options
+  - `-dSK_ANY -dSK_ENCODE`
+
+Uses:
+
+```pascal
+uses SysUtils, StringKitHelper;
+```
+
+Examples:
+
+```pascal
+begin
+  // 1) Base64
+  WriteLn('foo'.Encode64);    // Zm9v
+  WriteLn('Zm9v'.Decode64);   // foo
+
+  // 2) URL
+  WriteLn('Hello World!'.URLEncode);    // Hello+World%21
+  WriteLn('Hello+World%21'.URLDecode);  // Hello World!
+
+  // 3) HTML
+  WriteLn('<b>Hi</b>'.HTMLEncode);           // &lt;b&gt;Hi&lt;/b&gt;
+  WriteLn('&lt;b&gt;Hi&lt;/b&gt;'.HTMLDecode);  // <b>Hi</b>
+
+  // 4) Hex
+  WriteLn('abc'.HexEncode);     // 616263
+  WriteLn('616263'.HexDecode);  // abc
+
+  // 5) Chaining (HTML then URL)
+  WriteLn('<p class="x">'.HTMLEncode.URLEncode);
+end.
+```
+
+Note on defines scope:
+
+- `{$DEFINE ...}` inside your program controls conditional blocks in your program only. It does not affect how `src/StringKitHelper.pas` is compiled in a separate unit.
+- To actually compile the helper with only `SK_ENCODE`, set defines at the project/build level so the compiler sees them when compiling `StringKitHelper.pas`:
+  - Lazarus/FPC: Project Options > Compiler Options > Custom Options → `-dSK_ANY -dSK_ENCODE`
 
 ## 🎨 Start Weaving: Quick Thread Patterns
 
@@ -332,7 +443,6 @@ begin
   // Base64 encoding/decoding
   Encoded := TStringKit.Encode64('foo');               // Returns: 'Zm9v'
   Decoded := TStringKit.Decode64('Zm8=');              // Returns: 'fo'
-  Decoded := TStringKit.Decode64('Zg==');              // Returns: 'f'
   
   // Hexadecimal encoding
   Encoded := TStringKit.HexEncode('Hello');            // Returns: '48656C6C6F'
@@ -440,14 +550,8 @@ end;
 For detailed documentation, see:
 
 - 📋 [Cheat Sheet](docs/cheat-sheet.md)
-- 📝 [Strings](docs/StringKit.Strings.md)
+- 📝 [StringKit Helper Coverage](docs/stringkit-helper-coverage.md)
  
-
-## 💬 Community & Support
-
-- **Questions?** [Open a discussion](https://github.com/ikelaiah/stringkit-fp/discussions)
-- **Found a bug?** [Report an issue](https://github.com/ikelaiah/stringkit-fp/issues)
-
 
 ## ✅ Testing
 
@@ -464,9 +568,10 @@ $ ./TestRunner.exe -a --format=plain
 
 *Our roadmap for expanding the string artisan's toolkit*
 
-- **🌍 International Thread Support**: Enhance multi-byte character weaving for global text tapestries
-- **⚡ High-Speed Looms**: Optimize core algorithms for industrial-scale string processing
-- **📦 Loom Integration**: Seamless support for Free Pascal and Lazarus package managers
+- Remove custom types and use RTL types
+- Introduce custom method for hashing
+- Enhance multi-byte character weaving for global text tapestries
+- Seamless support for Free Pascal and Lazarus package managers
 
 
 ## 🤝 **Join the Weaving Circle**
