@@ -5,12 +5,11 @@ unit StringKit.Test;
 interface
 
 uses
-  Classes, SysUtils, DateUtils, fpcunit, testregistry,
+  Classes, SysUtils, Types, DateUtils, fpcunit, testregistry,
   StringKit;
 
 type
   TStringArray = array of string;
-  TMatchStrings = array of string;
 
 type
 
@@ -816,7 +815,7 @@ end;
 
 procedure TStringTests.Test54_Join;
 var
-  Arr1, Arr2, Arr3, EmptyArr: TMatchStrings;
+  Arr1, Arr2, Arr3, EmptyArr: TStringDynArray;
 begin
   SetLength(Arr1, 3);
   Arr1[0] := 'one';
@@ -851,7 +850,7 @@ end;
 
 procedure TStringTests.Test55_Split;
 var
-  Result: TMatchStrings;
+  Result: TStringDynArray;
 begin
   // Basic splitting
   Result := TStringKit.Split('one,two,three', ',');
@@ -958,7 +957,7 @@ end;
 
 procedure TStringTests.Test60_GenerateNGrams;
 var
-  Result: TMatchStrings;
+  Result: TStringDynArray;
 begin
   // Bigrams
   Result := TStringKit.GenerateNGrams('This is a test', 2);

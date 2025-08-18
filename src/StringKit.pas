@@ -5,7 +5,7 @@ unit StringKit;
 interface
 
 uses
-  Classes, SysUtils, RegExpr, StrUtils, Math, DateUtils, base64;
+  Classes, SysUtils, Types, RegExpr, StrUtils, Math, DateUtils, base64;
 
 type
   { TStringMatch
@@ -26,12 +26,7 @@ type
   }
   TMatchesResults = array of TStringMatch;
 
-  {
-   TMatchStrings
-   -------------
-   Array of strings for general string list operations or extracted matches.
-  }
-  TMatchStrings = array of string;
+  
 
   { TStringKit
     ----------
@@ -474,14 +469,14 @@ type
       @param Text The string to search within.
       @param Pattern The regular expression pattern to match.
       
-      @returns A dynamic array of strings (TMatchStrings), where each element is a matched substring.
+      @returns A dynamic array of strings (TStringDynArray), where each element is a matched substring.
                Returns an empty array if no matches are found.
       
       @warning Relies on ExtractMatches internally. Regular expressions can be computationally
                expensive. Returns an empty array for invalid patterns or no matches.
       
       @example
-        // Assuming Result is declared as TMatchStrings
+        // Assuming Result is declared as TStringDynArray
         Result := ExtractAllMatches('Emails: a@b.com, c@d.net.', '\w+@\w+\.\w+');
         // Result[0]: 'a@b.com'
         // Result[1]: 'c@d.net'
@@ -489,7 +484,7 @@ type
         Result := ExtractAllMatches('No emails here', '\w+@\w+\.\w+');
         // Length(Result) = 0
     }
-    class function ExtractAllMatches(const Text, Pattern: string): TMatchStrings; static;
+    class function ExtractAllMatches(const Text, Pattern: string): TStringDynArray; static;
     
     {
       @description Tests if a string fully matches a given regular expression pattern.
@@ -586,7 +581,7 @@ type
       
       @param AText The text to split into words.
       
-      @returns A dynamic array of strings (TMatchStrings), where each element is a word.
+      @returns A dynamic array of strings (TStringDynArray), where each element is a word.
                Returns an empty array if the text contains no alphanumeric characters.
       
       @warning Considers only ASCII letters and digits as part of words. Punctuation attached
@@ -594,7 +589,7 @@ type
                Multiple non-alphanumeric characters between words result in a single split.
       
       @example
-        // Assuming Result is declared as TMatchStrings
+        // Assuming Result is declared as TStringDynArray
         Result := GetWords('Hello, world! How are you?');
         // Result[0]: 'Hello'
         // Result[1]: 'world'
@@ -610,7 +605,7 @@ type
         Result := GetWords('---');
         // Length(Result) = 0
     }
-    class function GetWords(const AText: string): TMatchStrings; static;
+    class function GetWords(const AText: string): TStringDynArray; static;
     
     {
       @description Counts the number of non-overlapping occurrences of a substring within a text.
@@ -1507,7 +1502,7 @@ type
       @usage Use to combine multiple string pieces into one, for example, creating a comma-separated list
              or reconstructing a sentence from words.
       
-      @param Strings The array of strings (TMatchStrings) to join.
+      @param Strings The array of strings (TStringDynArray) to join.
       @param Delimiter The string to insert between each element of the array.
       
       @returns The concatenated string. Returns an empty string if the input array is empty.
@@ -1516,7 +1511,7 @@ type
       @warning None identified.
       
       @example
-        // Assuming Arr is TMatchStrings
+        // Assuming Arr is TStringDynArray
         Arr := ['apple', 'banana', 'cherry'];
         Result := Join(Arr, ', '); // Returns: 'apple, banana, cherry'
         
@@ -1526,7 +1521,7 @@ type
         SetLength(Arr, 0);
         Result := Join(Arr, ',');   // Returns: ''
     }
-    class function Join(const Strings: TMatchStrings; const Delimiter: string): string; static;
+    class function Join(const Strings: TStringDynArray; const Delimiter: string): string; static;
     
     {
       @description Splits a string into an array of substrings based on a specified delimiter.
@@ -1543,7 +1538,7 @@ type
       @param RemoveEmptyEntries If True, empty strings resulting from the split (e.g., from
                               consecutive delimiters) are excluded from the result array. Default is False.
       
-      @returns A dynamic array of strings (TMatchStrings) containing the substrings.
+      @returns A dynamic array of strings (TStringDynArray) containing the substrings.
       
       @warning The delimiter itself is not included in the results. If Text is empty, returns an array
                containing a single empty string unless RemoveEmptyEntries is True. If Delimiter is empty,
@@ -1551,7 +1546,7 @@ type
                The current implementation seems to handle empty delimiter by finding it at Pos 1, potentially leading to issues. Let's assume Delimiter is non-empty.
       
       @example
-        // Assuming Result is TMatchStrings
+        // Assuming Result is TStringDynArray
         Result := Split('a,b,c', ','); // Returns: ['a', 'b', 'c']
         Result := Split('a,,c', ','); // Returns: ['a', '', 'c']
         Result := Split('a,,c', ',', 0, True); // Returns: ['a', 'c'] (RemoveEmptyEntries=True)
@@ -1561,7 +1556,7 @@ type
         Result := Split('', ',', 0, True); // Returns: []
         Result := Split('test', 'x'); // Returns: ['test']
     }
-    class function Split(const Text, Delimiter: string; MaxSplit: Integer = 0; RemoveEmptyEntries: Boolean = False): TMatchStrings; static;
+    class function Split(const Text, Delimiter: string; MaxSplit: Integer = 0; RemoveEmptyEntries: Boolean = False): TStringDynArray; static;
     
     { -------------------- Phonetic Algorithms -------------------- }
     
@@ -1700,7 +1695,7 @@ type
       @param Text The text to process.
       @param N The size of the n-gram (e.g., 2 for bigrams, 3 for trigrams). Must be > 0.
       
-      @returns A dynamic array of strings (TMatchStrings), where each string is an n-gram
+      @returns A dynamic array of strings (TStringDynArray), where each string is an n-gram
                with words separated by single spaces. Returns an empty array if N <= 0,
                Text is empty, or Text contains fewer than N words.
       
@@ -1708,7 +1703,7 @@ type
                N-grams are simple space-separated concatenations of the identified words.
       
       @example
-        // Assuming Result is TMatchStrings
+        // Assuming Result is TStringDynArray
         Result := GenerateNGrams('the quick brown fox', 2); // Bigrams
         // Result[0]: 'the quick'
         // Result[1]: 'quick brown'
@@ -1728,7 +1723,7 @@ type
         Result := GenerateNGrams('test', 0); // N <= 0
         // Length(Result) = 0
     }
-    class function GenerateNGrams(const Text: string; N: Integer): TMatchStrings; static;
+    class function GenerateNGrams(const Text: string; N: Integer): TStringDynArray; static;
     
     { -------------------- Encoding/Decoding Functions -------------------- }
     
@@ -2216,7 +2211,7 @@ begin
   end;
 end;
 
-class function TStringKit.ExtractAllMatches(const Text, Pattern: string): TMatchStrings;
+class function TStringKit.ExtractAllMatches(const Text, Pattern: string): TStringDynArray;
 var
   Matches: TMatchesResults;
   I: Integer;
@@ -2261,7 +2256,7 @@ begin
   Result := StringReplace(Text, OldText, NewText, [rfReplaceAll]);
 end;
 
-class function TStringKit.GetWords(const AText: string): TMatchStrings;
+class function TStringKit.GetWords(const AText: string): TStringDynArray;
 var
   WordList: TStringList;
   I: Integer;
@@ -2650,7 +2645,7 @@ end;
 
 class function TStringKit.ToCamelCase(const Text: string): string;
 var
-  Words: TMatchStrings;
+  Words: TStringDynArray;
   I: Integer;
   Word: string;
 begin
@@ -2675,7 +2670,7 @@ end;
 
 class function TStringKit.ToPascalCase(const Text: string): string;
 var
-  Words: TMatchStrings;
+  Words: TStringDynArray;
   I: Integer;
   Word: string;
 begin
@@ -2693,7 +2688,7 @@ end;
 
 class function TStringKit.ToSnakeCase(const Text: string): string;
 var
-  Words: TMatchStrings;
+  Words: TStringDynArray;
   I: Integer;
 begin
   Words := GetWords(Text);
@@ -2709,7 +2704,7 @@ end;
 
 class function TStringKit.ToKebabCase(const Text: string): string;
 var
-  Words: TMatchStrings;
+  Words: TStringDynArray;
   I: Integer;
 begin
   Words := GetWords(Text);
@@ -2971,7 +2966,7 @@ begin
     Result := '-' + Result;
 end;
 
-class function TStringKit.Join(const Strings: TMatchStrings; const Delimiter: string): string;
+class function TStringKit.Join(const Strings: TStringDynArray; const Delimiter: string): string;
 var
   I: Integer;
 begin
@@ -2986,7 +2981,7 @@ begin
     Result := Result + Delimiter + Strings[I];
 end;
 
-class function TStringKit.Split(const Text, Delimiter: string; MaxSplit: Integer = 0; RemoveEmptyEntries: Boolean = False): TMatchStrings;
+class function TStringKit.Split(const Text, Delimiter: string; MaxSplit: Integer = 0; RemoveEmptyEntries: Boolean = False): TStringDynArray;
 var
   SplitList: TStringList;
   I, SplitCount: Integer;
@@ -3356,7 +3351,7 @@ end;
 
 class function TStringKit.CountWords(const Text: string): Integer;
 var
-  Words: TMatchStrings;
+  Words: TStringDynArray;
 begin
   Words := GetWords(Text);
   Result := Length(Words);
@@ -3364,7 +3359,7 @@ end;
 
 class function TStringKit.FleschKincaidReadability(const Text: string): Double;
 var
-  Words: TMatchStrings;
+  Words: TStringDynArray;
   Sentences, Syllables, I, WordCount: Integer;
   Word: string;
 begin
@@ -3414,9 +3409,9 @@ begin
     Result := 100;
 end;
 
-class function TStringKit.GenerateNGrams(const Text: string; N: Integer): TMatchStrings;
+class function TStringKit.GenerateNGrams(const Text: string; N: Integer): TStringDynArray;
 var
-  Words: TMatchStrings;
+  Words: TStringDynArray;
   NGramList: TStringList;
   I, J, NGramCount: Integer;
   NGram: string;

@@ -21,6 +21,27 @@ Notes:
 
 ---
 
+## Release [1.7.0] - 2025-08-19
+
+### Changed
+
+- Migrated to built-in RTL types for arrays of strings:
+  - Replaced custom `TMatchStrings` with `Types.TStringDynArray` across the public API, helpers, tests, and documentation.
+  - Helper method signatures updated accordingly, e.g., `JoinWith(const Strings: TStringDynArray)`.
+- Documentation updated (README and Cheat Sheet) to reflect the new types and signatures.
+
+### Migration Notes
+
+- If you referenced `TMatchStrings`, switch to `Types.TStringDynArray`.
+- Ensure `Types` is in your unit's `uses` clause when working with `TStringDynArray`.
+- Instance-style `JoinWith` remains the recommended usage: `', '.JoinWith(Arr)`.
+
+### Fixed
+
+- Minor consistency fixes in examples and comments related to split/join and n-grams.
+
+---
+
 ## Release [1.6.0] - 2025-08-16
 
 ### Added

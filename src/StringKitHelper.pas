@@ -26,7 +26,7 @@ unit StringKitHelper;
 interface
 
 uses
-  Classes, SysUtils, StringKit, RegExpr;
+  Classes, SysUtils, Types, StringKit, RegExpr;
 
 // Feature toggles
 // If no specific feature macro is provided, enable all by default.

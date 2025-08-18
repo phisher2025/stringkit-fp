@@ -21,7 +21,7 @@ begin
   S := '  Mixed Case  '.Trim.ToUpper;   // Chaining: 'MIXED CASE'
   if 'ABC123'.MatchesPattern('^[A-Z]{3}\d{3}$') then ; // True (regex via helper)
   // Split and Join via helpers
-  // Note: Split returns TMatchStrings; JoinWith uses Self as the delimiter
+  // Note: Split returns TStringDynArray; JoinWith uses Self as the delimiter
   S := ','.JoinWith('a,b,,c'.Split(',', 0, True)); // 'a,b,c'
 end;
 ```

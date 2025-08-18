@@ -3,7 +3,7 @@ begin
   Result := TStringKit.ExtractMatches(Self, Pattern);
 end;
 
-function TStringHelperEx.ExtractAllMatches(const Pattern: string): TMatchStrings;
+function TStringHelperEx.ExtractAllMatches(const Pattern: string): TStringDynArray;
 begin
   Result := TStringKit.ExtractAllMatches(Self, Pattern);
 end;
@@ -23,7 +23,7 @@ begin
   Result := TStringKit.ReplaceText(Self, OldText, NewText);
 end;
 
-function TStringHelperEx.GetWords: TMatchStrings;
+function TStringHelperEx.GetWords: TStringDynArray;
 begin
   Result := TStringKit.GetWords(Self);
 end;

@@ -318,7 +318,7 @@ end;
 ```pascal
 var
   Matches: TMatchesResults;
-  AllMatches: TMatchStrings;
+  AllMatches: TStringDynArray;
   i: Integer;
 begin
   // Built-in validators
@@ -457,7 +457,7 @@ end;
 var
   WordCount: Integer;
   Readability: Double;
-  NGrams: TMatchStrings;
+  NGrams: TStringDynArray;
   i: Integer;
 begin
   // Basic text statistics
@@ -480,7 +480,7 @@ end;
 
 ```pascal
 var
-  Parts: TMatchStrings;
+  Parts: TStringDynArray;
   Joined: string;
   i: Integer;
 begin
