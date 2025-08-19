@@ -6,7 +6,7 @@
 [![Documentation](https://img.shields.io/badge/Docs-Available-brightgreen.svg)](docs/)
 [![Tests](https://img.shields.io/badge/Tests-Passing-brightgreen.svg)](tests/)
 [![Status](https://img.shields.io/badge/Status-Ready%20to%20Weave-brightgreen.svg)]()
-[![Version](https://img.shields.io/badge/Version-1.6.0-blueviolet.svg)]()
+[![Version](https://img.shields.io/badge/Version-1.7.0-blueviolet.svg)]()
 
 
 <p align="center">
