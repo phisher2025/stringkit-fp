@@ -14,11 +14,10 @@ unit StringKitHelper.Test;
 interface
 
 uses
-  Classes, SysUtils, fpcunit, testregistry, StringKit, StringKitHelper;
+  Classes, SysUtils, Types, fpcunit, testregistry, StringKit, StringKitHelper;
 
 type
   TStringArray = array of string;
-  TMatchStrings = array of string;
 
 type
   { TStringHelperTests }
@@ -721,7 +720,7 @@ end;
 
 procedure TStringHelperTests.Test60_GenerateNGrams;
 var
-  Result: TMatchStrings;
+  Result: TStringDynArray;
 begin
   // Bigrams
   Result := 'This is a test'.GenerateNGrams(2);

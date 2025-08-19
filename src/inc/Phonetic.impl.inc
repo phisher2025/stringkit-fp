@@ -18,7 +18,7 @@ begin
   Result := TStringKit.FleschKincaidReadability(Self);
 end;
 
-function TStringHelperEx.GenerateNGrams(N: Integer): TMatchStrings;
+function TStringHelperEx.GenerateNGrams(N: Integer): TStringDynArray;
 begin
   Result := TStringKit.GenerateNGrams(Self, N);
 end;
